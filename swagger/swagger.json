@@ -83,6 +83,77 @@
           }
         }
       }
+    },
+    "/update-post": {
+      "post": {
+        "tags": [
+          "blog post"
+        ],
+        "summary": "Update a blog post",
+        "description": "",
+        "operationId": "updatePost",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postID",
+            "description": "ID of post",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Post object that needs to be added to the Blog",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/blogpostUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "[{'response':'Successfully updated'}]"
+          }
+        }
+      }
+    },
+    "/delete-blog/{postID}": {
+      "delete": {
+        "tags": [
+          "blog post"
+        ],
+        "summary": "Delete a post by post ID",
+        "description": "",
+        "operationId": "deletePost",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "postID",
+            "in": "path",
+            "description": "ID of the post that needs to be deleted",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "[{'response':'Successfully deleted.'}]"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -93,6 +164,30 @@
         "post"
       ],
       "properties": {
+        "title": {
+          "type": "string",
+          "example": "My First Blog Post"
+        },
+        "post": {
+          "type": "string",
+          "example": "Lorem Ipsum"
+        }
+      },
+      "xml": {
+        "name": "Pet"
+      }
+    },
+    "blogpostUpdate": {
+      "type": "object",
+      "required": [
+        "title",
+        "post"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1234567890"
+        },
         "title": {
           "type": "string",
           "example": "My First Blog Post"
